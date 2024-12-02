@@ -1,11 +1,11 @@
 import React from 'react';
 import { Platform } from 'react-native';
 
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLingui } from '@lingui/react/macro';
 import { Tabs } from 'expo-router';
 
 import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
@@ -32,18 +32,18 @@ export default function TabLayout() {
       <Tabs.Screen
         name='index'
         options={{
-          title: t`Home`,
+          title: t`Read`,
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name='house.fill' color={color} />
+            <MaterialCommunityIcons name='cube-scan' size={28} color={color} />
           ),
         }}
       />
       <Tabs.Screen
         name='explore'
         options={{
-          title: t`Explore`,
+          title: t`Edit`,
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name='paperplane.fill' color={color} />
+            <MaterialCommunityIcons name='file-edit' size={28} color={color} />
           ),
         }}
       />
