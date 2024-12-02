@@ -9,7 +9,7 @@ import NfcManager, { NfcTech, type TagEvent } from 'react-native-nfc-manager';
 import { Pressable } from '@/components/Pressable';
 import { Text } from '@/components/Text';
 
-export default function HomeScreen() {
+export default function ReadTag() {
   const [nfcData, setNfcData] = useState<TagEvent | null>(null);
 
   async function readNdef() {
