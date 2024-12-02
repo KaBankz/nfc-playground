@@ -55,7 +55,13 @@ export default function ReadTag() {
                 onPress: () => console.log('Cancel Pressed'),
                 style: 'cancel',
               },
-              { text: t`OK`, onPress: () => setNfcData(null) },
+              {
+                text: t`OK`,
+                onPress: () => {
+                  setNfcData(null);
+                  setNfcMessages(null);
+                },
+              },
             ]);
           }}>
           <Text className='text-xl font-semibold'>
