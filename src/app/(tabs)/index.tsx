@@ -10,12 +10,22 @@ import { Text } from '@/components/Text';
 
 export default function ReadTag() {
   const [nfcData, setNfcData] = useState<TagEvent | null>(null);
+  const [nfcMessages, setNfcMessages] = useState<string[] | null>(null);
 
   async function readNdef() {
     try {
       await NfcManager.requestTechnology(NfcTech.Ndef);
       const tag = await NfcManager.getTag();
       tag.ndefStatus = await NfcManager.ndefHandler.getNdefStatus();
+      tag.nxpBytes = await NfcManager.nfcAHandler.transceive([0x3c, 0x00]);
+
+      tag?.ndefMessage?.forEach((message) => {
+        const text = message.payload
+          .map((byte: number) => String.fromCharCode(byte))
+          .join('');
+        setNfcMessages((prev) => [...(prev ?? []), text]);
+      });
+
       console.log('Tag found', tag);
       setNfcData(tag);
     } catch (ex) {
@@ -59,6 +69,15 @@ export default function ReadTag() {
       <View className='rounded-lg bg-neutral-900 p-2'>
         <Text className='font-mono font-semibold'>
           {nfcData !== null ? JSON.stringify(nfcData, null, 4) : t`No Data`}
+        </Text>
+      </View>
+
+      <Text className='text-lg font-medium'>
+        <Trans>Parsed Messages:</Trans>
+      </Text>
+      <View className='rounded-lg bg-neutral-900 p-2'>
+        <Text className='font-mono font-semibold'>
+          {nfcData !== null ? nfcMessages : t`No Data`}
         </Text>
       </View>
     </ScrollView>
