@@ -11,6 +11,7 @@ import { useFonts, type FontSource } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
+import NfcManager from 'react-native-nfc-manager';
 
 import '@/app/global.css';
 import '@/locale/i18n';
@@ -19,6 +20,8 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 void SplashScreen.preventAutoHideAsync();
+
+NfcManager.start();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
