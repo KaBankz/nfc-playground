@@ -39,7 +39,7 @@ const parseNfcTagData = (tag: TagEvent) => {
     };
 
     return {
-      readable: statusDescriptions[status.status] || 'Unknown',
+      readable: statusDescriptions[status.status] ?? 'Unknown',
       capacity: `${status.capacity} bytes`,
     };
   };
@@ -81,12 +81,12 @@ const parseNfcTagData = (tag: TagEvent) => {
       console.log(`\nRecord ${index + 1}:`);
       console.log(`- TNF: ${record.tnf} (${tnfDescriptions[record.tnf]})`);
       console.log(`- Record Type: ${getRecordType(record.type)}`);
-      console.log(`- Record ID: ${record.id || 'N/A'}`);
+      console.log(`- Record ID: ${JSON.stringify(record.id) || 'N/A'}`);
 
       parsedData += `\nRecord ${index + 1}:\n`;
       parsedData += `- TNF: ${record.tnf} (${tnfDescriptions[record.tnf]})\n`;
       parsedData += `- Record Type: ${getRecordType(record.type)}\n`;
-      parsedData += `- Record ID: ${record.id || 'N/A'}\n`;
+      parsedData += `- Record ID: ${JSON.stringify(record.id) ?? 'N/A'}\n`;
 
       try {
         if (Array.isArray(record.type) && record.type[0] === 84) {
@@ -130,14 +130,14 @@ export default function ReadTag() {
     <TabBodyScrollView className='flex-1' contentContainerClassName='gap-4 p-6'>
       <View className='flex-row gap-4'>
         <Pressable
-          className='grow items-center rounded-lg bg-neutral-800 px-4 py-6 transition-colors active:bg-neutral-700'
+          className='grow items-center rounded-lg bg-neutral-300 px-4 py-6 transition-colors active:bg-neutral-400 dark:bg-neutral-800 dark:active:bg-neutral-700'
           onPress={readNdef}>
           <Text className='text-xl font-semibold'>
             <Trans>Read NFC Tag</Trans>
           </Text>
         </Pressable>
         <Pressable
-          className='grow items-center rounded-lg bg-red-600 px-4 py-6 transition-colors active:bg-red-700'
+          className='grow items-center rounded-lg bg-red-500 px-4 py-6 transition-colors active:bg-red-600 dark:bg-red-600 dark:active:bg-red-700'
           onPress={() => {
             Alert.alert(t`Are you sure?`, t`This will reset the NFC data`, [
               {
@@ -163,7 +163,7 @@ export default function ReadTag() {
       <Text className='text-lg font-medium'>
         <Trans>Raw NFC Data:</Trans>
       </Text>
-      <View className='rounded-lg bg-neutral-900 p-2'>
+      <View className='rounded-lg bg-neutral-300 p-2 dark:bg-neutral-900'>
         <Text className='font-mono font-semibold'>
           {nfcData !== null ? JSON.stringify(nfcData, null, 4) : t`No Data`}
         </Text>
@@ -172,7 +172,7 @@ export default function ReadTag() {
       <Text className='text-lg font-medium'>
         <Trans>Parsed NFC Data:</Trans>
       </Text>
-      <View className='rounded-lg bg-neutral-900 p-2'>
+      <View className='rounded-lg bg-neutral-300 p-2 dark:bg-neutral-900'>
         <Text className='font-mono font-semibold'>
           {nfcData !== null ? parsedNfcData : t`No Data`}
         </Text>

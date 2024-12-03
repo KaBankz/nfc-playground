@@ -32,14 +32,14 @@ export default function WriteTag() {
     <TabBodyScrollView className='flex-1' contentContainerClassName='gap-4 p-6'>
       <View className='flex-row gap-4'>
         <Pressable
-          className='grow items-center rounded-lg bg-neutral-800 px-4 py-6 transition-colors active:bg-neutral-700'
+          className='grow items-center rounded-lg bg-neutral-300 px-4 py-6 transition-colors active:bg-neutral-400 dark:bg-neutral-800 dark:active:bg-neutral-700'
           onPress={writeNdef}>
           <Text className='text-xl font-semibold'>
             <Trans>Write NFC Tag</Trans>
           </Text>
         </Pressable>
         <Pressable
-          className='grow items-center rounded-lg bg-red-600 px-4 py-6 transition-colors active:bg-red-700'
+          className='grow items-center rounded-lg bg-red-500 px-4 py-6 transition-colors active:bg-red-600 dark:bg-red-600 dark:active:bg-red-700'
           onPress={() => {
             Alert.alert(t`Are you sure?`, t`This will reset the NFC data`, [
               {
@@ -59,7 +59,7 @@ export default function WriteTag() {
       <Text className='text-lg font-medium'>
         <Trans>Input:</Trans>
       </Text>
-      <View className='rounded-lg bg-neutral-900 p-2'>
+      <View className='rounded-lg bg-neutral-300 p-2 dark:bg-neutral-900'>
         <TextInput
           value={userInput}
           onChangeText={setUserInput}
