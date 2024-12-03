@@ -1,10 +1,9 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { Trans, useLingui } from '@lingui/react/macro';
 import { Link, Stack } from 'expo-router';
 
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { Text } from '@/components/Text';
 
 export default function NotFoundScreen() {
   const { t } = useLingui();
@@ -12,16 +11,16 @@ export default function NotFoundScreen() {
   return (
     <>
       <Stack.Screen options={{ title: t`Oops!` }} />
-      <ThemedView style={styles.container}>
-        <ThemedText type='title'>
+      <View style={styles.container}>
+        <Text>
           <Trans>This screen doesn't exist.</Trans>
-        </ThemedText>
+        </Text>
         <Link href='/' style={styles.link}>
-          <ThemedText type='link'>
+          <Text>
             <Trans>Go to home screen!</Trans>
-          </ThemedText>
+          </Text>
         </Link>
-      </ThemedView>
+      </View>
     </>
   );
 }
